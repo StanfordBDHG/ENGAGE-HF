@@ -31,7 +31,7 @@ jobs:
       contents: read
   buildandtest:
     name: Build and Test
-    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@checkout-firebase-repo
     permissions:
       contents: read
     with:
@@ -40,7 +40,8 @@ jobs:
       setupSimulators: true
       setupfirebaseemulator: true
       fastlanelane: test
-      firebaseemulatorimport: ./firebase
+      firebaseemulatorimport: firebase
+      firebaserepository: StanfordBDHG/ENGAGE-HF-Firebase
     secrets:
       GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
   uploadcoveragereport:
