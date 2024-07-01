@@ -34,19 +34,6 @@
         }
       }
     },
-    "%lld BPM" : {
-
-    },
-    "%lld/%lld mmHg" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld mmHg"
-          }
-        }
-      }
-    },
     "ACCOUNT_NEXT" : {
       "localizations" : {
         "en" : {
@@ -110,9 +97,6 @@
     "An invitation code is at least 8 characters long." : {
 
     },
-    "Close" : {
-      "comment" : "For closing sheets."
-    },
     "CLOSE" : {
       "comment" : "MARK: General",
       "localizations" : {
@@ -147,10 +131,58 @@
     "Content ..." : {
 
     },
-    "Discard" : {
+    "Devices" : {
 
     },
     "Education" : {
+
+    },
+    "HEALTHKIT_PERMISSIONS_BUTTON" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grant Access"
+          }
+        }
+      }
+    },
+    "HEALTHKIT_PERMISSIONS_DESCRIPTION" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This onboarding step allows you to customize the onboarding flow to explain how the application uses the HealhtKit data and allows a user to cusomize the selection."
+          }
+        }
+      }
+    },
+    "HEALTHKIT_PERMISSIONS_SUBTITLE" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spezi can access data from HealthKit using the HealthKitDataSource module."
+          }
+        }
+      }
+    },
+    "HEALTHKIT_PERMISSIONS_TITLE" : {
+      "comment" : "MARK: HealthKit",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HealthKit Access"
+          }
+        }
+      }
+    },
+    "Hold down the Bluetooth button for 3 seconds to put the device into pairing mode." : {
 
     },
     "Home" : {
@@ -290,9 +322,6 @@
         }
       }
     },
-    "Invalid Sample" : {
-
-    },
     "Invitation Code" : {
 
     },
@@ -320,9 +349,6 @@
 
     },
     "List Without Sections" : {
-
-    },
-    "Measurement Recorded" : {
 
     },
     "No recent %@ measurement available" : {
@@ -384,7 +410,7 @@
     "Redeem Invitation Code" : {
 
     },
-    "Save" : {
+    "Show Measurements" : {
 
     },
     "The invitation code is invalid or has already been used." : {

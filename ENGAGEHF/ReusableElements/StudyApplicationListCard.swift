@@ -13,17 +13,15 @@ import SwiftUI
 
 
 struct StudyApplicationListCard<Content: View>: View {
-    @Environment(\.colorScheme) var colorScheme
-    
-    var content: () -> Content
-    
+    let content: () -> Content
+
     
     var body: some View {
         content()
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background {
-                Color(uiColor: colorScheme == .light ? .systemBackground : .secondarySystemBackground)
+                Color(uiColor: .secondarySystemGroupedBackground)
                     .ignoresSafeArea()
             }
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
@@ -60,6 +58,7 @@ extension Text {
 }
 
 
+#if DEBUG
 #Preview("Sections") {
     NavigationStack {
         List {
@@ -104,3 +103,4 @@ extension Text {
             .navigationTitle("List Without Sections")
     }
 }
+#endif

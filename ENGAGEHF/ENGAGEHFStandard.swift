@@ -13,6 +13,7 @@ import OSLog
 import PDFKit
 import Spezi
 import SpeziAccount
+import SpeziDevices
 import SpeziFirebaseAccountStorage
 import SpeziFirestore
 import SpeziHealthKit
@@ -65,18 +66,28 @@ actor ENGAGEHFStandard: Standard, EnvironmentAccessible, OnboardingConstraint, A
         }
     }
 
-    func add(sample: HKSample) async { // kept for compatibility with the Standard Constraint
-        do {
-            try await self.addMeasurement(sample: sample)
-        } catch {
-            logger.error("Could not store HealthKit sample: \(error)")
+
+    func addMeasurement(samples: [HKSample]) async throws {
+        guard !samples.isEmpty else {
+            return
         }
-    }
 
+        logger.debug("Saving \(samples.count) samples to firestore ...")
+        let userDocument = try await userDocumentReference
 
-    func addMeasurement(sample: HKSample) async throws {
         do {
-            try await healthKitDocument(id: sample.id, type: sample.sampleType).setData(from: sample.resource)
+            let batch = Firestore.firestore().batch()
+            for sample in samples {
+                do {
+                    let document = try healthKitDocument(for: userDocument, id: sample.id, type: sample.sampleType)
+                    try batch.setData(from: sample.resource, forDocument: document)
+                } catch {
+                    // either document retrieval or encoding failed, this should not stop other samples from getting saved
+                    logger.debug("Failed to store sample in firebase, discarding: \(sample)")
+                }
+            }
+
+            try await batch.commit()
         } catch {
             throw FirestoreError(error)
         }
@@ -106,12 +117,16 @@ actor ENGAGEHFStandard: Standard, EnvironmentAccessible, OnboardingConstraint, A
         }
     }
     
-    
-    private func healthKitDocument(id uuid: UUID, type: HKSampleType) async throws -> DocumentReference {
+
+    private func healthKitDocument(for user: DocumentReference, id uuid: UUID, type: HKSampleType) throws -> DocumentReference {
         var collectionBucket: String? {
             switch type {
             case HKQuantityType(.bodyMass):
                 return "bodyWeightObservations"
+            case HKQuantityType(.bodyMassIndex):
+                return "bodyMassIndexObservations"
+            case HKQuantityType(.height):
+                return "heightObservations"
             case HKQuantityType(.heartRate):
                 return "heartRateObservations"
             case HKCorrelationType(.bloodPressure):
@@ -125,7 +140,7 @@ actor ENGAGEHFStandard: Standard, EnvironmentAccessible, OnboardingConstraint, A
             throw ENGAGEHFStandardError.invalidHKSampleType
         }
         
-        return try await userDocumentReference
+        return user
             .collection(collectionBucket)
             .document(uuid.uuidString) // Set the document identifier to the UUID of the document.
     }

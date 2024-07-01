@@ -10,8 +10,8 @@
 import XCTest
 
 
-class ENGAGEHFTests: XCTestCase {
-    func testExample() throws {
+class EngageHFTests: XCTestCase {
+    func testEngage() {
         XCTAssertTrue(true)
     }
 }

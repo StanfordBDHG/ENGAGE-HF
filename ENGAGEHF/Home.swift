@@ -6,9 +6,11 @@
 // SPDX-License-Identifier: MIT
 //
 
-import BluetoothServices
 import SpeziAccount
 import SpeziBluetooth
+import SpeziBluetoothServices
+import SpeziDevices
+import SpeziDevicesUI
 import SpeziOnboarding
 import SpeziViews
 import SwiftUI
@@ -20,6 +22,7 @@ struct HomeView: View {
         case heart
         case medications
         case education
+        case devices
     }
     
     static var accountEnabled: Bool {
@@ -32,18 +35,19 @@ struct HomeView: View {
     }
 
     
-    @Environment(MeasurementManager.self) private var measurementManager
-    @Environment(WeightScaleDevice.self) private var weightScale: WeightScaleDevice?
+    @Environment(HealthMeasurements.self) private var measurements
     @Environment(Bluetooth.self) private var bluetooth
+    @Environment(ENGAGEHFStandard.self) private var standard
+
     @Environment(\.dismiss) private var dismiss
     
     @AppStorage(StorageKeys.homeTabSelection) private var selectedTab = Tabs.home
     @State private var presentingAccount = false
     
-    
+
     var body: some View {
-        @Bindable var measurementManager = measurementManager
-        
+        @Bindable var measurements = measurements
+
         TabView(selection: $selectedTab) {
             Dashboard(presentingAccount: $presentingAccount)
                 .tag(Tabs.home)
@@ -55,8 +59,17 @@ struct HomeView: View {
                 .tabItem {
                     Label("Education", systemImage: "brain")
                 }
+            NavigationStack {
+                DevicesTab(appName: ENGAGEHF.appName ?? "ENGAGE") {
+                    Text("Hold down the Bluetooth button for 3 seconds to put the device into pairing mode.")
+                }
+                    .environment(\.advertisementStaleInterval, 15)
+            }
+                .tag(Tabs.devices)
+                .tabItem {
+                    Label("Devices", systemImage: "sensor.fill")
+                }
         }
-            .autoConnect(enabled: bluetoothEnabled, with: bluetooth)
             .sheet(isPresented: $presentingAccount) {
                 AccountSheet()
             }
@@ -64,8 +77,10 @@ struct HomeView: View {
                 AccountSetupSheet()
             }
             .verifyRequiredAccountDetails(Self.accountEnabled)
-            .sheet(item: $measurementManager.newMeasurement) { measurement in
-                MeasurementRecordedView(measurement: measurement)
+            .sheet(isPresented: $measurements.shouldPresentMeasurements) {
+                MeasurementsRecordedSheet { samples in
+                    try await standard.addMeasurement(samples: samples)
+                }
             }
     }
 }
@@ -79,11 +94,11 @@ struct HomeView: View {
             AccountConfiguration {
                 MockUserIdPasswordAccountService()
             }
-            MeasurementManager()
+            HealthMeasurements()
             NotificationManager()
-            Bluetooth {
-                Discover(WeightScaleDevice.self, by: .advertisedService(WeightScaleService.self))
-            }
+            PairedDevices()
+            ConfigureTipKit()
+            Bluetooth {}
             VitalsManager()
         }
 }

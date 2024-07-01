@@ -1,5 +1,5 @@
 {
-  "originHash" : "4680bbbdca4179318420f5e90c76b7b5892a3fbaf02dc6668d80ce474e195a4d",
+  "originHash" : "bf5084f3a1640b549abaeb7502f3d1650efe31a71ce63ae49ff0fb7732a037e2",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "0382ca27f22fb3494cf657d8dc356dc282cd1193",
-        "version" : "3.4.1"
+        "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
+        "version" : "3.5.0"
       }
     },
     {
@@ -169,7 +169,7 @@
       "location" : "https://github.com/StanfordBDHG/ResearchKitOnFHIR",
       "state" : {
         "revision" : "dcd5f95522ed02a873b03c9638dbf397b99c74e0",
-        "version" : "1.4.0"
+        "version" : "2.0.0"
       }
     },
     {
@@ -204,8 +204,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StanfordSpezi/SpeziBluetooth.git",
       "state" : {
-        "revision" : "f3b8cc8461f12268b15db17aa45cc66b889cd1d0",
-        "version" : "1.6.0"
+        "revision" : "6b88cae1ea9a18ec875dcc8fae80cbeb291133f0",
+        "version" : "2.0.1"
       }
     },
     {
@@ -215,6 +215,15 @@
       "state" : {
         "revision" : "494b776f8c98d771e4a609a1fb706097dba4c030",
         "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "spezidevices",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/StanfordSpezi/SpeziDevices.git",
+      "state" : {
+        "branch" : "feature/initial-project-setup",
+        "revision" : "5daa2c122db5d30586f405b7908e251220dfc776"
       }
     },
     {
@@ -258,8 +267,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StanfordSpezi/SpeziNetworking",
       "state" : {
-        "revision" : "71236efc911d5580fbf4d53748f38ad22ef00a2d",
-        "version" : "1.0.0"
+        "revision" : "35e558d7839cde81f50bf7d187d0d7cb3513ca94",
+        "version" : "2.1.1"
       }
     },
     {
@@ -276,8 +285,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StanfordSpezi/SpeziQuestionnaire.git",
       "state" : {
-        "revision" : "76732ebcb0b521fa94d41c38a5fe35e6e1a87173",
-        "version" : "1.2.1"
+        "revision" : "853585fbdd5d2d0af440c805d629a025ef5545d9",
+        "version" : "1.2.2"
       }
     },
     {
@@ -330,8 +339,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio.git",
       "state" : {
-        "revision" : "e5a216ba89deba84356bad9d4c2eab99071c745b",
-        "version" : "2.67.0"
+        "revision" : "fc79798d5a150d61361a27ce0c51169b889e23de",
+        "version" : "2.68.0"
       }
     },
     {
@@ -402,8 +411,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/StanfordBDHG/XCTestExtensions.git",
       "state" : {
-        "revision" : "1fe9b8e76aeb7a132af37bfa0892160c9b662dcc",
-        "version" : "0.4.10"
+        "revision" : "69eae1a4490d3ec4f3cd20584aef3df9186e0904",
+        "version" : "0.4.11"
       }
     },
     {

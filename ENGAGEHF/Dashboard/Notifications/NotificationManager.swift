@@ -52,7 +52,7 @@ class NotificationManager: Module, EnvironmentAccessible {
             if FeatureFlags.setupTestEnvironment, let user {
                 // Make sure to not load the mock notifications multiple times
                 if let notifications = self?.notifications, notifications.isEmpty {
-                    Task {
+                    Task { [weak self] in
                         try await self?.setupNotificationTests(user: user)
                     }
                 }

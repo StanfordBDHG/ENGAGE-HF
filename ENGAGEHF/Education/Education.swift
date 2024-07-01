@@ -53,6 +53,8 @@ struct Education: View {
 }
 
 
+#if DEBUG
 #Preview {
     Education(presentingAccount: .constant(false))
 }
+#endif
